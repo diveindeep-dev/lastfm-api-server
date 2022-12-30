@@ -11,13 +11,14 @@ import logger from 'morgan';
 import cors from 'cors';
 import { CLIENT_URL } from './config/index.js';
 import indexRouter from './routes/index.js';
+import searchRouter from './routes/search.js';
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 const corsOptions = {
   origin: CLIENT_URL,
-  Credential: true,
+  credential: true,
 };
 app.use(cors(corsOptions));
 
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', indexRouter);
+app.use('/api/search', searchRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
