@@ -7,10 +7,11 @@ const getCover = async (req, res, next) => {
     );
 
     const albumList = getCoverByAlbum.data.results.albummatches.album;
+    const filteredAlbum = albumList.filter(
+      (album) => album.image[0][`#text`].length > 0,
+    );
 
-    res.status(200).json({
-      result: albumList,
-    });
+    res.status(200).json(filteredAlbum);
   } catch (err) {
     console.log(err);
   }
